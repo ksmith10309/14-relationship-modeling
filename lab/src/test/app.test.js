@@ -71,6 +71,26 @@ describe('Candymaker 200 Tests', () => {
         done();
       });
   });
+  it(`DELETE: test 204 for candy, returns no content in the body`, (done) => {
+    server(app)
+      .delete('/api/candy/' + york._id)
+      .then(response => {
+        expect(response.res.statusCode).toBe(204);
+        expect(response.res.statusMessage).toBe('No Content');
+        expect(response.body).toBeUndefined;
+        done();
+      });
+  });
+  it(`DELETE: test 204 for maker, returns no content in the body`, (done) => {
+    server(app)
+      .delete('/api/maker/' + mars._id)
+      .then(response => {
+        expect(response.res.statusCode).toBe(204);
+        expect(response.res.statusMessage).toBe('No Content');
+        expect(response.body).toBeUndefined;
+        done();
+      });
+  });
   it('PUT: test 200 for candy, returns a resource with a valid body', (done) => {
     server(app)
       .put('/api/candy/' + reeses._id)
@@ -174,6 +194,42 @@ describe('Candymaker 404 and 400 Tests', () => {
         done();
       });
   });
+  it(`DELETE: test 404 for candy, respond with 'not found' for valid requests made with an id that was not found`, (done) => {
+    server(app)
+      .delete('/api/candy/123')
+      .then(response => {
+        expect(response.res.statusCode).toBe(404);
+        expect(response.res.statusMessage).toBe('Not Found');
+        done();
+      });
+  });
+  it(`DELETE: test 404 for maker, respond with 'not found' for valid requests made with an id that was not found`, (done) => {
+    server(app)
+      .delete('/api/maker/123')
+      .then(response => {
+        expect(response.res.statusCode).toBe(404);
+        expect(response.res.statusMessage).toBe('Not Found');
+        done();
+      });
+  });
+  it(`DELETE: test 400 for candy, responds with 'bad request' if no id was provided`, (done) => {
+    server(app)
+      .delete('/api/candy')
+      .then(response => {
+        expect(response.res.statusCode).toBe(400);
+        expect(response.res.statusMessage).toBe('Bad Request');
+        done();
+      });
+  });
+  it(`DELETE: test 400 for maker, responds with 'bad request' if no id was provided`, (done) => {
+    server(app)
+      .delete('/api/maker')
+      .then(response => {
+        expect(response.res.statusCode).toBe(400);
+        expect(response.res.statusMessage).toBe('Bad Request');
+        done();
+      });
+  });  
   it(`PUT: test 404 for candy, responds with 'not found' for valid requests made with an id that was not found`, (done) => {
     server(app)
       .put('/api/candy/123')

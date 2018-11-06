@@ -26,7 +26,7 @@ This application is a server with POST, GET, DELETE, and PUT functionality and u
     - For manufacturer, type `localhost:8080/api/maker` in the address bar
     - For candy, type `localhost:8080/api/candy` in the address bar
     - Click on the Body tab and set it to raw
-    - In the body, type a note in JSON with the follow format:
+    - In the body, type a note in JSON with the following format:
         - For manufacturer: `{ "name": "[name]", "location": "[location]" }`
         - For candy: `{ "name": "[name]", "manufacturer": "[manufacturer id]" }`
     - Click Send
